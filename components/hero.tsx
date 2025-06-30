@@ -14,7 +14,6 @@ export default function Hero() {
     const aboutSection = document.getElementById("about")
     if (aboutSection) {
       aboutSection.scrollIntoView({ behavior: "smooth" })
-      // Focus management for accessibility
       aboutSection.focus()
     }
   }
@@ -23,7 +22,7 @@ export default function Hero() {
     if (showDescription) {
       const timer = setTimeout(() => {
         setShowActions(true)
-      }, 4000) // Adjusted timing for new shorter text
+      }, 4000)
       return () => clearTimeout(timer)
     }
   }, [showDescription])
@@ -148,47 +147,39 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-4 professional-card rounded-2xl hover:scale-110 transition-all duration-300 hover:border-aura-indigo/50 focus:border-aura-indigo focus:ring-2 focus:ring-aura-indigo/20 focus:outline-none"
-                aria-label="Visit Devashish's GitHub profile (opens in new tab)"
+                aria-label="Visit Devashish's GitHub profile"
               >
-                <Github
-                  size={28}
-                  className="text-muted-foreground group-hover:text-aura-indigo transition-colors"
-                  aria-hidden="true"
-                />
+                <Github size={28} className="text-muted-foreground group-hover:text-aura-indigo transition-colors" />
               </a>
               <a
                 href="https://linkedin.com/in/devashish-bose-bb044223a"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group p-4 professional-card rounded-2xl hover:scale-110 transition-all duration-300 hover:border-aura-indigo/50 focus:border-aura-indigo focus:ring-2 focus:ring-aura-indigo/20 focus:outline-none"
-                aria-label="Visit Devashish's LinkedIn profile (opens in new tab)"
+                aria-label="Visit Devashish's LinkedIn profile"
               >
-                <Linkedin
-                  size={28}
-                  className="text-muted-foreground group-hover:text-aura-indigo transition-colors"
-                  aria-hidden="true"
-                />
+                <Linkedin size={28} className="text-muted-foreground group-hover:text-aura-indigo transition-colors" />
               </a>
               <a
                 href="mailto:bosedevashish7@gmail.com"
                 className="group p-4 professional-card rounded-2xl hover:scale-110 transition-all duration-300 hover:border-aura-indigo/50 focus:border-aura-indigo focus:ring-2 focus:ring-aura-indigo/20 focus:outline-none"
-                aria-label="Send email to Devashish at bosedevashish7@gmail.com"
+                aria-label="Send email to Devashish"
               >
-                <Mail
-                  size={28}
-                  className="text-muted-foreground group-hover:text-aura-indigo transition-colors"
-                  aria-hidden="true"
-                />
+                <Mail size={28} className="text-muted-foreground group-hover:text-aura-indigo transition-colors" />
               </a>
             </nav>
 
-            <button
+            <a
+              href="/Devashish-Bose-Resume.pdf"
+              download
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-aura-indigo to-dill-green text-white font-outfit font-bold rounded-2xl hover:from-primary/90 hover:to-secondary/90 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-aura-indigo"
               aria-label="Download Devashish's resume as PDF"
             >
               <Download size={20} aria-hidden="true" />
               <span>Download Resume</span>
-            </button>
+            </a>
           </div>
         )}
 
@@ -198,7 +189,7 @@ export default function Hero() {
             className="animate-bounce p-2 rounded-full professional-card hover:border-aura-indigo/50 transition-all duration-300 focus:border-aura-indigo focus:ring-2 focus:ring-aura-indigo/20 focus:outline-none"
             aria-label="Scroll to About section"
           >
-            <ArrowDown size={24} className="text-aura-indigo" aria-hidden="true" />
+            <ArrowDown size={24} className="text-aura-indigo" />
           </button>
         )}
       </div>
@@ -208,8 +199,6 @@ export default function Hero() {
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-aura-indigo/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-dill-green/10 rounded-full blur-3xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-butter-yellow/10 rounded-full blur-2xl animate-pulse delay-500" />
-
-        {/* Floating particles */}
         <div className="absolute top-20 left-20 w-2 h-2 bg-aura-indigo/30 rounded-full animate-float delay-300" />
         <div className="absolute top-40 right-32 w-1 h-1 bg-dill-green/40 rounded-full animate-float delay-700" />
         <div className="absolute bottom-32 left-40 w-1.5 h-1.5 bg-butter-yellow/30 rounded-full animate-float delay-1000" />

@@ -76,7 +76,8 @@ dist
 
 # Gatsby files
 .cache/
-public
+public/    # REMOVE this line (was ignoring the entire public folder)
+!public/Devashish-Bose-Resume.pdf  # EXPLICITLY allow your resume
 
 # Storybook build outputs
 .out

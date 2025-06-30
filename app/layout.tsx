@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter, Outfit, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -28,7 +28,6 @@ export const metadata: Metadata = {
     "Data Science and IoT enthusiast with expertise in machine learning, big data, and microcontroller programming. B.Tech student at MITS, RGPV Gwalior specializing in converting raw data into actionable insights.",
   keywords: "Data Science, IoT, Machine Learning, Python, Arduino, Hadoop, Power BI, Devashish Bose, MITS Gwalior",
   authors: [{ name: "Devashish Bose" }],
-  viewport: "width=device-width, initial-scale=1",
   openGraph: {
     title: "Devashish Bose - Data Science & IoT Portfolio",
     description:
@@ -40,7 +39,13 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-    generator: 'v0.dev'
+  generator: 'v0.dev',
+}
+
+// ✅ FIXED: viewport is now exported separately
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 }
 
 export default function RootLayout({
