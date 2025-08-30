@@ -28,7 +28,7 @@ export default function Projects() {
       github: "https://github.com/devashish588/Predictive_Maintenance",
       category: "Data Engineering",
       status: "Completed",
-      image: "public/images/PMUSD.jpg",
+      image: "/images/PMUSD.jpg",
     },
     {
       title: "Automated Attendance System Using RFID",
@@ -58,7 +58,7 @@ export default function Projects() {
       github: "https://github.com/devashish588/fullstack-web-app",
       category: "Web Development",
       status: "Completed",
-      image: "public/images/Portfolio.jpg",
+      image: "/images/Portfolio.jpg",
     },
     {
       title: "Machine Learning Prediction Model - Twitter Sentiment Analysis",
@@ -68,7 +68,7 @@ export default function Projects() {
       github: "https://github.com/devashish588/Twitter-sentiment-analysis",
       category: "Machine Learning",
       status: "Completed",
-      image: "public/images/twitter.png",
+      image: "/images/twitter.png",
     },
     {
       title: "Smart Home IoT System",
@@ -78,7 +78,7 @@ export default function Projects() {
       github: "https://github.com/devashish588/smart-home-iot",
       category: "IoT Development",
       status: "Completed",
-      image: "public/images/HAS.png",
+      image: "/images/HAS.png",
     },
   ]
 
