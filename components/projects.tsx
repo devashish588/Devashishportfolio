@@ -18,7 +18,7 @@ export default function Projects() {
       github: "#",
       category: "Data Engineering",
       status: "Completed",
-      image: "/images/hadoop-big-data.jpg",
+      image: "public/images/hadoop.jpg",
     },
     {
       title: "Predictive Maintenance using Sensor Data",
@@ -28,7 +28,7 @@ export default function Projects() {
       github: "https://github.com/devashish588/Predictive_Maintenance",
       category: "Data Engineering",
       status: "Completed",
-      image: "/predictive-maintenance-sensor-data-nasa-turbofan-e.png",
+      image: "public/images/PMUSD.jpg",
     },
     {
       title: "Automated Attendance System Using RFID",

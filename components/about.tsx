@@ -84,7 +84,7 @@ export default function About() {
               <div className="space-y-6 text-muted-foreground font-inter leading-relaxed">
                 <p className="text-lg md:text-xl">
                   <Typewriter
-                    text="I'm a B.Tech student specializing in Internet of Things (IoT) at Madhav Institute of Technology and Science, RGPV, Gwalior. With practical experience in machine learning, statistical modeling, and big data tools including Hadoop and Power BI."
+                    text="I am a B.Tech student in Internet of Things (IoT) at Madhav Institute of Technology and Science, RGPV, Gwalior. I am driven by curiosity, adaptability, and a commitment to continuous learning. My approach blends analytical thinking with creativity, enabling me to approach challenges with clarity and purpose."
                     delay={800}
                     speed={25}
                     cursor={false}
@@ -93,7 +93,7 @@ export default function About() {
 
                 <p className="text-lg md:text-xl">
                   <Typewriter
-                    text="I excel in converting raw data into actionable insights through effective visualization and analysis. Skilled in Python, SQL, and microcontroller programming, I'm passionate about solving real-world challenges with data-driven solutions."
+                    text="I excel in converting raw data into actionable insights through effective visualization and analysis. Skilled in Python, SQL, and microcontroller programming, I'm passionate about solving real-world challenges with data-driven solutions.Beyond academics, I actively contribute to leadership and teamwork. As Social Media Head and former Graphics Designer of the Science Club (MITS), I have played a role in strengthening digital outreach and visual communication for events. Additionally, my experience as a college football team player has shaped my discipline, resilience, and collaborative spirit."
                     delay={3500}
                     speed={25}
                     cursor={false}
@@ -102,7 +102,7 @@ export default function About() {
 
                 <p className="text-lg md:text-xl">
                   <Typewriter
-                    text="My expertise spans from data analysis and visualization to IoT hardware development, bridging the gap between physical devices and intelligent data processing."
+                    text="At the core, I aspire to create meaningful impact by combining technology, leadership, and creativity to deliver solutions that matter."
                     delay={6500}
                     speed={25}
                     cursor={false}
@@ -124,7 +124,7 @@ export default function About() {
                 <h4 className="text-aura-indigo font-bold font-outfit text-lg mb-3">Education</h4>
                 <p className="text-foreground font-semibold">B.Tech in IoT</p>
                 <p className="text-muted-foreground text-sm">MITS, RGPV Gwalior</p>
-                <p className="text-dill-green font-semibold text-sm">CGPA: 7.0</p>
+                <p className="text-dill-green font-semibold text-sm">CGPA: 7.3</p>
               </div>
 
               <div className="professional-card p-6 rounded-2xl hover:border-dill-green/50 transition-all duration-300 focus-within:border-dill-green/50 focus-within:ring-2 focus-within:ring-dill-green/20">
