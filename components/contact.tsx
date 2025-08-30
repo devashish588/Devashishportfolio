@@ -1,13 +1,31 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
-import { Mail, Phone, Linkedin, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react"
+import { useState, useRef } from "react"
+import { Mail, Phone, Linkedin, MapPin, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
+import emailjs from "@emailjs/browser"
 import Typewriter from "./typewriter"
 
+interface FormData {
+  name: string
+  email: string
+  subject: string
+  message: string
+}
+
+interface ValidationErrors {
+  [key: string]: string
+}
+
+const EMAILJS = {
+  serviceId: "service_sv4zwbl",
+  templateId: "template_ijeplqd",
+  autoReplyId: "template_ltaz7fe",
+  publicKey: "UnROHaX9XQSSOqfpP",
+}
+
 export default function Contact() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     subject: "",
@@ -16,13 +34,17 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
   const [showForm, setShowForm] = useState(false)
-  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [errors, setErrors] = useState<ValidationErrors>({})
+  const [statusMessage, setStatusMessage] = useState("")
+  const alertRef = useRef<HTMLDivElement | null>(null)
 
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {}
+  const validateForm = (): boolean => {
+    const newErrors: ValidationErrors = {}
 
     if (!formData.name.trim()) {
       newErrors.name = "Name is required"
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters long"
     }
 
     if (!formData.email.trim()) {
@@ -33,10 +55,14 @@ export default function Contact() {
 
     if (!formData.subject.trim()) {
       newErrors.subject = "Subject is required"
+    } else if (formData.subject.trim().length < 5) {
+      newErrors.subject = "Subject must be at least 5 characters long"
     }
 
     if (!formData.message.trim()) {
       newErrors.message = "Message is required"
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters long"
     }
 
     setErrors(newErrors)
@@ -47,9 +73,46 @@ export default function Contact() {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
 
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }))
+    }
+
+    if (submitStatus !== "idle") {
+      setSubmitStatus("idle")
+      setStatusMessage("")
+    }
+  }
+
+  const sendWithEmailJS = async () => {
+    const params = {
+      to_name: "Devashish Bose",
+      to_email: "bosedevashish7@gmail.com",
+      from_name: formData.name,
+      from_email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      reply_to: formData.email,
+    }
+
+    // Primary: send message to you
+    await emailjs.send(EMAILJS.serviceId, EMAILJS.templateId, params, {
+      publicKey: EMAILJS.publicKey,
+    })
+
+    // Secondary: auto-reply to sender (optional, won’t throw if missing variables in template)
+    try {
+      await emailjs.send(
+        EMAILJS.serviceId,
+        EMAILJS.autoReplyId,
+        {
+          to_name: formData.name,
+          to_email: formData.email,
+          subject: formData.subject,
+        },
+        { publicKey: EMAILJS.publicKey },
+      )
+    } catch {
+      // Swallow auto-reply errors to not affect the main submission UX
     }
   }
 
@@ -62,17 +125,20 @@ export default function Contact() {
 
     setIsSubmitting(true)
     setSubmitStatus("idle")
+    setStatusMessage("")
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-
-      console.log("Form submitted:", formData)
-
+      await sendWithEmailJS()
       setSubmitStatus("success")
       setFormData({ name: "", email: "", subject: "", message: "" })
+      setErrors({})
+      setTimeout(() => {
+        alertRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+      }, 50)
     } catch (error) {
+      console.error("EmailJS send error:", error)
       setSubmitStatus("error")
+      setStatusMessage("Failed to send message. Please try again or contact me directly.")
     } finally {
       setIsSubmitting(false)
     }
@@ -187,6 +253,34 @@ export default function Contact() {
               <h3 className="text-3xl font-bold font-outfit text-aura-indigo mb-8">
                 <Typewriter text="Send a Message" delay={1500} speed={80} cursor={false} />
               </h3>
+
+              {/* Provided success/error banners */}
+              {submitStatus === "success" && (
+                <div
+                  ref={alertRef}
+                  className="flex items-center space-x-3 p-4 bg-dill-green/20 border border-dill-green/30 rounded-xl mb-6"
+                  role="alert"
+                  aria-live="polite"
+                >
+                  <CheckCircle className="text-dill-green" size={20} aria-hidden={true} />
+                  <span className="text-dill-green font-outfit font-medium">
+                    {"Message sent successfully! I'll get back to you soon."}
+                  </span>
+                </div>
+              )}
+
+              {submitStatus === "error" && (
+                <div
+                  className="flex items-center space-x-3 p-4 bg-cherry-red/20 border border-cherry-red/30 rounded-xl mb-6"
+                  role="alert"
+                  aria-live="polite"
+                >
+                  <AlertCircle className="text-cherry-red" size={20} aria-hidden={true} />
+                  <span className="text-cherry-red font-outfit font-medium">
+                    {statusMessage || "Failed to send message. Please try again or contact me directly."}
+                  </span>
+                </div>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <div className="grid md:grid-cols-2 gap-6">
@@ -307,11 +401,8 @@ export default function Contact() {
                 >
                   {isSubmitting ? (
                     <>
-                      <div
-                        className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"
-                        aria-hidden="true"
-                      />
-                      <span>Sending...</span>
+                      <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
+                      <span>Sending Message...</span>
                     </>
                   ) : (
                     <>
@@ -320,33 +411,6 @@ export default function Contact() {
                     </>
                   )}
                 </button>
-
-                {/* Status Messages */}
-                {submitStatus === "success" && (
-                  <div
-                    className="flex items-center space-x-3 p-4 bg-dill-green/20 border border-dill-green/30 rounded-xl"
-                    role="alert"
-                    aria-live="polite"
-                  >
-                    <CheckCircle className="text-dill-green" size={20} aria-hidden="true" />
-                    <span className="text-dill-green font-outfit font-medium">
-                      Message sent successfully! I'll get back to you soon.
-                    </span>
-                  </div>
-                )}
-
-                {submitStatus === "error" && (
-                  <div
-                    className="flex items-center space-x-3 p-4 bg-cherry-red/20 border border-cherry-red/30 rounded-xl"
-                    role="alert"
-                    aria-live="polite"
-                  >
-                    <AlertCircle className="text-cherry-red" size={20} aria-hidden="true" />
-                    <span className="text-cherry-red font-outfit font-medium">
-                      Failed to send message. Please try again or contact me directly.
-                    </span>
-                  </div>
-                )}
               </form>
             </div>
           </div>
