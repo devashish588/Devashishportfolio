@@ -15,10 +15,10 @@ export default function Projects() {
       description:
         "Processed 5GB+ datasets using HDFS and MapReduce. Queried structured data with Hive and visualized KPIs in Tableau for comprehensive business intelligence.",
       technologies: ["Hadoop", "Python", "Hive", "Tableau", "HDFS", "MapReduce"],
-      github: "#",
+      github: "https://github.com/devashish588/hadoop-big-data-analysis",
       category: "Data Engineering",
       status: "Completed",
-      image: "public/images/hadoop.jpg",
+      image: "/images/hadoop.jpg",
     },
     {
       title: "Predictive Maintenance using Sensor Data",
@@ -28,7 +28,7 @@ export default function Projects() {
       github: "https://github.com/devashish588/Predictive_Maintenance",
       category: "Data Engineering",
       status: "Completed",
-      image: "public/images/PMUSD.jpg",
+      image: "public\images\PMUSD.jpg",
     },
     {
       title: "Automated Attendance System Using RFID",
@@ -58,7 +58,7 @@ export default function Projects() {
       github: "https://github.com/devashish588/fullstack-web-app",
       category: "Web Development",
       status: "Completed",
-      image: "/images/fullstack-web-development.jpg",
+      image: "public\images\Portfolio.jpg",
     },
     {
       title: "Machine Learning Prediction Model - Twitter Sentiment Analysis",
@@ -68,17 +68,17 @@ export default function Projects() {
       github: "https://github.com/devashish588/Twitter-sentiment-analysis",
       category: "Machine Learning",
       status: "Completed",
-      image: "/images/machine-learning-sentiment.jpg",
+      image: "public\images\twitter.png",
     },
     {
       title: "Smart Home IoT System",
       description:
         "Developed an integrated smart home system using ESP32 and various sensors. Created mobile app for remote monitoring and control of lighting, temperature, and security systems.",
       technologies: ["ESP32", "Arduino", "React Native", "Firebase", "Sensors", "WiFi"],
-      github: "#",
+      github: "https://github.com/devashish588/smart-home-iot",
       category: "IoT Development",
-      status: "In Progress",
-      image: "/images/smart-home-iot.jpg",
+      status: "Completed",
+      image: "public\images\HAS.png",
     },
   ]
 
