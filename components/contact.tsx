@@ -84,37 +84,42 @@ export default function Contact() {
   }
 
   const sendWithEmailJS = async () => {
-    const params = {
-      to_name: "Devashish Bose",
-      to_email: "bosedevashish7@gmail.com",
-      from_name: formData.name,
-      from_email: formData.email,
-      subject: formData.subject,
-      message: formData.message,
-      reply_to: formData.email,
-    }
-
-    // Primary: send message to you
-    await emailjs.send(EMAILJS.serviceId, EMAILJS.templateId, params, {
-      publicKey: EMAILJS.publicKey,
-    })
-
-    // Secondary: auto-reply to sender (optional, won’t throw if missing variables in template)
-    try {
-      await emailjs.send(
-        EMAILJS.serviceId,
-        EMAILJS.autoReplyId,
-        {
-          to_name: formData.name,
-          to_email: formData.email,
-          subject: formData.subject,
-        },
-        { publicKey: EMAILJS.publicKey },
-      )
-    } catch {
-      // Swallow auto-reply errors to not affect the main submission UX
-    }
+  const params = {
+    to_name: "Devashish Bose",
+    to_email: "bosedevashish7@gmail.com",
+    from_name: formData.name,
+    from_email: formData.email,
+    subject: formData.subject,
+    message: formData.message,
+    reply_to: formData.email,
   }
+
+  // 1️⃣ Send message to YOU
+  await emailjs.send(
+    EMAILJS.serviceId,
+    EMAILJS.templateId, // <-- FIXED: use contact template here
+    params,
+    { publicKey: EMAILJS.publicKey }
+  )
+
+  // 2️⃣ Auto-reply to sender
+  try {
+    await emailjs.send(
+      EMAILJS.serviceId,
+      EMAILJS.autoReplyId, // <-- correct for auto reply
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      },
+      { publicKey: EMAILJS.publicKey }
+    )
+  } catch {
+    // Ignore auto-reply errors to not affect UX
+  }
+}
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
